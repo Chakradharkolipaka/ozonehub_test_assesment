@@ -1,4 +1,69 @@
+import { useLocation, useNavigate } from 'react-router-dom';
+import Login from './components/User/Login';
+import Register from './components/User/Register';
+import ForgotPassword from './components/User/ForgotPassword';
+import Account from './components/User/Account';
+
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const goToLogin = (e) => {
+    e.preventDefault();
+    navigate('/login');
+  };
+
+  const handlePlaceBid = (e) => {
+    e.preventDefault();
+    navigate('/login');
+  };
+
+  const goToRegister = (e) => {
+    e.preventDefault();
+    navigate('/register');
+  };
+
+  const goToForgotPassword = (e) => {
+    e.preventDefault();
+    navigate('/password/forgot');
+  };
+
+  if (location.pathname === '/login') {
+    return <Login />;
+  }
+
+  if (location.pathname === '/register') {
+    return <Register />;
+  }
+
+  if (location.pathname === '/password/forgot') {
+    return <ForgotPassword />;
+  }
+
+  if (location.pathname === '/account') {
+    return <Account />;
+  }
+
+  const handleConnectWallet = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (typeof window.ethereum === "undefined") {
+        alert("Please install MetaMask to connect your wallet.");
+        return;
+      }
+
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const connectedAccount = accounts && accounts.length > 0 ? accounts[0] : "";
+
+      if (connectedAccount) {
+        alert(`Wallet connected: ${connectedAccount}`);
+      }
+    } catch (error) {
+      console.error("Connection error:", error);
+      alert("Wallet connection failed. Please try again.");
+    }
+  };
   
   return (
     <div className="App">
@@ -140,17 +205,17 @@ User
 </a>
 <ul class="dropdown-menu">
 <li class="nav-item">
-<a href="login.html" class="nav-link">
+<a href="/login" class="nav-link" onClick={goToLogin}>
 Log In
 </a>
 </li>
 <li class="nav-item">
-<a href="register.html" class="nav-link">
+<a href="/register" class="nav-link" onClick={goToRegister}>
 Register
 </a>
 </li>
 <li class="nav-item">
-<a href="forgot-password.html" class="nav-link">
+<a href="/password/forgot" class="nav-link" onClick={goToForgotPassword}>
 Forgot Password
 </a>
 </li>
@@ -247,8 +312,9 @@ Contact Us
 </ul>
 <div class="others-options">
 <ul class="optional-item-list">
+<li><a href="/login" onClick={goToLogin}>Sign In</a></li>
 <li><a href="create-collection.html">Create</a></li>
-<li><a href="add-wallet.html" class="active">Connect Wallet</a></li>
+<li><a href="#" class="active" onClick={handleConnectWallet}>Connect Wallet</a></li>
 </ul>
 </div>
 </div>
@@ -276,8 +342,9 @@ Contact Us
 <div class="side-nav justify-content-center align-items-center">
 <div class="side-nav-item">
 <ul class="optional-item-list">
+<li><a href="/login" onClick={goToLogin}>Sign In</a></li>
 <li><a href="create-collection.html">Create</a></li>
-<li><a href="add-wallet.html" class="active">Connect Wallet</a></li>
+<li><a href="#" class="active" onClick={handleConnectWallet}>Connect Wallet</a></li>
 </ul>
 </div>
 </div>
@@ -316,7 +383,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam etiam rhonc
 </p>
 <div class="banner-btn">
 <a href="about.html" class="default-btn border-radius-5">Explore More</a>
-<a href="add-wallet.html" class="default-btn two border-radius-5">Connect NFT</a>
+<a href="/login" class="default-btn border-radius-5" onClick={goToLogin}>Login</a>
+<a href="#" class="default-btn two border-radius-5" onClick={handleConnectWallet}>Connect NFT</a>
 </div>
 </div>
 </div>
@@ -370,7 +438,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam etiam rhonc
 <h4>15,00 ETH</h4>
 </div>
 </div>
-<a href="auction.html" class="place-btn">Place Bid</a>
+<a href="/login" class="place-btn" onClick={handlePlaceBid}>Place Bid</a>
 </div>
 </div>
 </div>
@@ -406,7 +474,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam etiam rhonc
 <h4>12,00 ETH</h4>
 </div>
 </div>
-<a href="auction.html" class="place-btn">Place Bid</a>
+<a href="/login" class="place-btn" onClick={handlePlaceBid}>Place Bid</a>
 </div>
 </div>
 </div>
@@ -442,7 +510,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam etiam rhonc
 <h4>11,00 ETH</h4>
 </div>
 </div>
-<a href="auction.html" class="place-btn">Place Bid</a>
+<a href="/login" class="place-btn" onClick={handlePlaceBid}>Place Bid</a>
 </div>
 </div>
 </div>
@@ -478,7 +546,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam etiam rhonc
 <h4>13,00 ETH</h4>
 </div>
 </div>
-<a href="auction.html" class="place-btn">Place Bid</a>
+<a href="/login" class="place-btn" onClick={handlePlaceBid}>Place Bid</a>
 </div>
 </div>
 </div>
@@ -514,7 +582,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam etiam rhonc
 <h4>12,00 ETH</h4>
 </div>
 </div>
-<a href="auction.html" class="place-btn">Place Bid</a>
+<a href="/login" class="place-btn" onClick={handlePlaceBid}>Place Bid</a>
 </div>
 </div>
 </div>
@@ -550,7 +618,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam etiam rhonc
 <h4>11,00 ETH</h4>
 </div>
 </div>
-<a href="auction.html" class="place-btn">Place Bid</a>
+<a href="/login" class="place-btn" onClick={handlePlaceBid}>Place Bid</a>
 </div>
 </div>
 </div>

@@ -82,7 +82,7 @@ const Register = () => {
             dispatch(clearErrors());
         }
         if (isAuthenticated) {
-            navigate('/')
+            navigate('/account')
         }
     }, [dispatch, error, isAuthenticated, navigate, enqueueSnackbar]);
 

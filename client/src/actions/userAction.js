@@ -93,9 +93,10 @@ export const registerUser = (userData) => async (dispatch) => {
         });
 
     } catch (error) {
+        const message = error?.response?.data?.message || error?.message || "Registration failed. Please try again.";
         dispatch({
             type: REGISTER_USER_FAIL,
-            payload: error.response.data.message,
+            payload: message,
         });
     }
 };

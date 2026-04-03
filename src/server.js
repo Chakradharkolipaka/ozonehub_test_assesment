@@ -10,6 +10,7 @@ process.on('uncaughtException', (err) => {
 });
 
 // connectDatabase();
+connectDatabase();
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_NAME,
